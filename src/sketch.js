@@ -99,22 +99,28 @@ export const mySketch = (p) => {
             }
         };
 
-        // p.mouseDragged = (e) => {
-        //     let x = e.pageX - offsetLeft;
-        //     let y = e.pageY - offsetTop;
-        //     for (let i = 0; i < rows; i++) {
-        //         for (let j = 0; j < cols; j++) {
-        //             let startX = gridSettings.grid[i][j].x;
-        //             let startY = gridSettings.grid[i][j].y;
+        p.mouseDragged = (e) => {
+            if (selectedValue != WALL && selectedValue != REMOVE_WALL) return;
+            let x = e.pageX - offsetLeft;
+            let y = e.pageY - offsetTop;
+            for (let i = 0; i < rows; i++) {
+                for (let j = 0; j < cols; j++) {
+                    let startX = gridSettings.grid[i][j].x;
+                    let startY = gridSettings.grid[i][j].y;
 
-        //             let endX = gridSettings.grid[i][j].endX;
-        //             let endY = gridSettings.grid[i][j].endY;
+                    let endX = gridSettings.grid[i][j].endX;
+                    let endY = gridSettings.grid[i][j].endY;
 
-        //             if (x > startX && x < endX && y > startY && y < endY) {
-        //                 console.log(`dragged ${i} - ${j}`);
-        //             }
-        //         }
-        //     }
-        // };
+                    if (x > startX && x < endX && y > startY && y < endY) {
+                        if (selectedValue === WALL) {
+                            if (gridSettings.grid[i][j].isStart || gridSettings.grid[i][j].isEnd) return;
+                            gridSettings.grid[i][j].isBlocked = true;
+                        } else if (selectedValue === REMOVE_WALL) {
+                            gridSettings.grid[i][j].isBlocked = false;
+                        }
+                    }
+                }
+            }
+        };
     };
 };
