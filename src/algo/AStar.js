@@ -92,7 +92,7 @@ export class AStar {
                     neighbor.f = neighbor.g + neighbor.h;
                 }
             }
-            await sleep(100);
+            await sleep(50);
         }
         this.finding = false;
 
@@ -111,67 +111,5 @@ export class AStar {
         this.closedSet = new Array();
         this.path = new Array();
         this.finding = false;
-
-        console.log("Astar reset success full");
     }
 }
-
-// function findWinnerIndex(openSet) {
-//     let idx = 0;
-//     for (let i = 0; i < openSet.length; i++) {
-//         let ele1 = openSet[i];
-//         let ele2 = openSet[idx];
-//         if (ele1.f < ele2.f) {
-//             idx = i;
-//         }
-//     }
-//     return idx;
-// }
-
-// function heuristic(p, a, b) {
-//     let d = p.dist(a.j, a.i, b.j, b.i);
-//     // let d = Math.abs(a.i - b.i) + Math.abs(a.j - b.j);
-//     return d;
-// }
-
-// export async function AStar(p, openSet, closedSet, path, endNode) {
-//     let winnerIdx = findWinnerIndex(openSet);
-//     var current = openSet[winnerIdx];
-//     if (current === endNode) {
-//         let temp = current;
-//         path.push(temp);
-//         while (temp.parent) {
-//             path.push(temp.parent);
-//             temp = temp.parent;
-//         }
-//         path.reverse();
-//         console.log("DONE");
-//         p.noLoop();
-//     }
-//     openSet.splice(winnerIdx, 1);
-//     closedSet.push(current);
-
-//     let neighbors = current.neighbors;
-//     for (let i = 0; i < neighbors.length; i++) {
-//         let neighbor = neighbors[i];
-//         let betterPath = false;
-//         if (!closedSet.includes(neighbor)) {
-//             let tempG = current.g + 1;
-//             if (openSet.includes(neighbor)) {
-//                 if (tempG < neighbor.g) {
-//                     neighbor.g = tempG;
-//                     betterPath = true;
-//                 }
-//             } else {
-//                 neighbor.g = tempG;
-//                 betterPath = true;
-//                 openSet.push(neighbor);
-//             }
-//             if (betterPath) {
-//                 neighbor.parent = current;
-//                 neighbor.h = heuristic(p, neighbor, endNode);
-//                 neighbor.f = neighbor.g + neighbor.h;
-//             }
-//         }
-//     }
-// }
